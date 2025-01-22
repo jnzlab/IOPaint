@@ -133,6 +133,17 @@ pip install -r requirements.txt
 python3 main.py start --model lama --port 8080
 ```
 
+You can remove watermark from multiple images at once in bulk (to clean dataset images)
+
+Just Install back-end requirements and start backend service, keep the service running and run watermark-remover.py simultaneously
+```bash
+pip install -r requirements.txt
+python3 main.py start --model lama --port 8080
+python3 watermark-remover.py
+```
+
+Make sure to define the input and output directory before running the watermark-remover.py file
+
 Then you can visit `http://localhost:5173/` for development.
 The frontend code will automatically update after being modified,
 but the backend needs to restart the service after modifying the python code.
