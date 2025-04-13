@@ -54,6 +54,7 @@
   - [GFPGAN](https://iopaint.com/plugins/GFPGAN): Face Restoration
   - [RestoreFormer](https://iopaint.com/plugins/RestoreFormer): Face Restoration
 - [FileManager](https://iopaint.com/file_manager): Browse your pictures conveniently and save them directly to the output directory.
+- Bulk Watermark Removal: Automatically process entire datasets to remove watermarks while maintaining folder structure and original filenames.
 
 
 ## Quick Start
@@ -102,6 +103,43 @@ iopaint run --model=lama --device=cpu \
 
 `--image` is the folder containing input images, `--mask` is the folder containing corresponding mask images.
 When `--mask` is a path to a mask file, all images will be processed using this mask.
+
+### Bulk Watermark Removal
+
+IOPaint provides a convenient way to remove watermarks from entire datasets in bulk. This is particularly useful when you have thousands of images that need watermark removal while maintaining their original folder structure.
+
+To use the bulk watermark removal feature:
+
+1. First, start the IOPaint service:
+```bash
+pip install iopaint
+iopaint start --model=lama --device=cpu --port=8080
+```
+
+2. In a separate terminal, run the watermark removal script:
+```bash
+python watermark-remover.py
+```
+
+The script will:
+- Automatically detect and process all images in your dataset
+- Maintain the original folder structure
+- Create a new cleaned dataset with the same organization
+- Show progress bars for each class folder
+- Provide a summary of successful and failed operations
+
+Before running the script, make sure to update these paths in the script:
+```python
+dataset_root = r"path/to/your/original/dataset"  # Root folder containing class folders
+output_root = r"path/to/your/output/dataset"     # Where to save processed images
+```
+
+The script automatically:
+- Creates appropriate masks for watermark areas
+- Handles various image formats (jpg, jpeg, png)
+- Maintains original filenames
+- Provides detailed progress tracking
+- Preserves image quality while removing watermarks
 
 You can see more information about the available models and plugins supported by IOPaint below.
 
